@@ -118,3 +118,201 @@ Whether you are selling **rare collectibles**, **fashion**, or **electronics**, 
 
 ### 🔨 Bidding & Auctions
 - [ ] 🛡️ **As an admin**, I want to oversee and manage the bidding system, ensuring fair practices and preventing fraudulent or manipulative bidding.
+
+
+# ENDPOINT APIs
+
+## Auth APIs
+
+/**
+ * @route POST /auth/login
+ * @description Login using email and password
+ * @body {email, password}
+ * @access Public
+ */
+
+/**
+ * @route POST /auth/register
+ * @description Register a new user (buyer or seller)
+ * @body {name, email, password, role}
+ * @access Public
+ */
+
+/**
+ * @route POST /auth/logout
+ * @description Logout user
+ * @access Private
+ */
+
+## Buyer APIs
+
+/**
+ * @route GET /buyers/products
+ * @description Browse products by categories and filters (price, location, condition)
+ * @query {category, priceRange, location, condition}
+ * @access Public
+ */
+
+/**
+ * @route GET /buyers/search
+ * @description Search for products using advanced search options
+ * @query {keywords, priceRange, condition, sellerRating}
+ * @access Public
+ */
+
+/**
+ * @route GET /buyers/product/:productId
+ * @description View detailed product information
+ * @param {productId} ID of the product
+ * @access Public
+ */
+
+/**
+ * @route POST /buyers/cart
+ * @description Add products to the cart
+ * @body {productId, quantity}
+ * @access Private (Registered buyers only)
+ */
+
+/**
+ * @route POST /buyers/checkout
+ * @description Checkout the cart and proceed with payment
+ * @body {cartId, paymentMethod}
+ * @access Private (Registered buyers only)
+ */
+
+/**
+ * @route GET /buyers/orders
+ * @description View and track order history with real-time updates
+ * @access Private (Registered buyers only)
+ */
+
+/**
+ * @route POST /buyers/bid
+ * @description Place a bid on an auction item
+ * @body {productId, bidAmount}
+ * @access Private (Registered buyers only)
+ */
+
+/**
+ * @route POST /buyers/feedback/:orderId
+ * @description Leave feedback for sellers after a transaction
+ * @body {rating, comment}
+ * @access Private (Registered buyers only)
+ */
+
+/**
+ * @route POST /buyers/report/:productId
+ * @description Report issues with a product or transaction
+ * @body {issueDescription}
+ * @access Private (Registered buyers only)
+ */
+
+## Seller APIs
+
+/**
+ * @route POST /sellers/products
+ * @description Create a new product listing
+ * @body {title, description, price, condition, images, category, shippingDetails, paymentOptions}
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route PUT /sellers/products/:productId
+ * @description Update product details
+ * @param {productId} ID of the product
+ * @body {title, description, price, condition, images, category, shippingDetails, paymentOptions}
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route DELETE /sellers/products/:productId
+ * @description Remove a product listing
+ * @param {productId} ID of the product
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route GET /sellers/orders
+ * @description View incoming orders from buyers
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route PUT /sellers/orders/:orderId
+ * @description Update the shipping status of an order
+ * @param {orderId} ID of the order
+ * @body {shippingStatus}
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route GET /sellers/reports
+ * @description View sales reports and earnings
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route POST /sellers/feedback/:buyerId
+ * @description Leave feedback for buyers
+ * @body {rating, comment}
+ * @access Private (Sellers only)
+ */
+
+/**
+ * @route POST /sellers/report/:buyerId
+ * @description Report buyer misconduct
+ * @body {issueDescription}
+ * @access Private (Sellers only)
+ */
+## Admin APIs
+
+/**
+ * @route GET /admin/dashboard
+ * @description View platform metrics and marketplace activity
+ * @access Private (Admins only)
+ */
+
+/**
+ * @route GET /admin/users
+ * @description Manage user accounts (buyers and sellers)
+ * @query {role, status}
+ * @access Private (Admins only)
+ */
+
+/**
+ * @route PUT /admin/users/:userId
+ * @description Update user status (ban/unban, reset password)
+ * @param {userId} ID of the user
+ * @body {status, newPassword}
+ * @access Private (Admins only)
+ */
+
+/**
+ * @route DELETE /admin/users/:userId
+ * @description Delete a user account
+ * @param {userId} ID of the user
+ * @access Private (Admins only)
+ */
+
+/**
+ * @route GET /admin/products
+ * @description Manage product listings (flag, remove inappropriate content)
+ * @access Private (Admins only)
+ */
+
+/**
+ * @route PUT /admin/orders/:orderId
+ * @description Resolve disputes between buyers and sellers
+ * @param {orderId} ID of the order
+ * @body {resolutionDetails}
+ * @access Private (Admins only)
+ */
+
+/**
+ * @route POST /admin/notifications
+ * @description Send notifications to users about promotions, updates, or issues
+ * @body {message, targetUsers}
+ * @access Private (Admins only)
+ */
+
